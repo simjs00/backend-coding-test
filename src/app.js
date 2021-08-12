@@ -76,8 +76,11 @@ module.exports = (db) => {
         });
     });
 
-    app.get('/rides', (req, res) => {
-        db.all('SELECT * FROM Rides', function (err, rows) {
+    app.get('/rides/:page/:limit', (req, res) => {
+        var page = req.param.page
+        var limit = req.param.limit
+        var offset = (page  * limit) - page
+        db.all('SELECT * FROM Rides LIMIT = ? OFFSET = ?', limit,offset, function (err, rows) {
             if (err) {
                 return res.send({
                     error_code: 'SERVER_ERROR',

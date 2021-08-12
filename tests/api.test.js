@@ -30,3 +30,13 @@ describe('API tests', () => {
         });
     });
 });
+
+describe('API tests', () => {
+    describe('GET /rides/1/1', () => {
+        it('should return success', (done) => {
+            request(app)
+                .get('/rides/1/1')
+                .expect(200, done);
+        });
+    });
+});
